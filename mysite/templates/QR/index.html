@@ -6,12 +6,19 @@
 <body>
 <p>QR計算</p>
 
-<form action="/doQR/" mthod="get">
-	<p>輸入矩陣</p>
-	<textarea name="matrix" cols="20", rows="10"></textarea>
-	<p>輸入維度</p>
-	<p><input type="number" name="dim"></p>
-	<button type="submit"> 計算</button>
-</form>
+	<form action="/doQR/" mthod="get">
+		<p>輸入矩陣</p>
+		<textarea name="matrix" cols="20", rows="10"></textarea>
+		<p>輸入維度</p>
+		<p><input type="number" name="dim"></p>
+		<button type="submit"> 計算</button>
+	</form>
+	<div name="result">
+		<p>{{Err}}</p>
+		<p>Eigen vectors</p>
+		<p>{{U}}</p>
+		<p>Lambdas</p>
+		<p>{{Lds}}</p>
+	</div>
 </body>
 </html>

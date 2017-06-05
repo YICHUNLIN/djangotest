@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render_to_response
 import numpy as np
 import configparser
 import math
@@ -10,30 +11,35 @@ def qrindex(request):
 def doQR(request):
 	#print(request.GET)
 	#print("Ori matrix")
-	A = DataPaser().matrixFromRequest(request.GET['matrix'], request.GET['dim'])
 	#print(test[1])
 	#A = DataPaser().matrixParser("0551283_1.ini")
 	#A = DataPaser().makeadata()
 	#print(A[1])
-	decomper = Decomposition()
-	U = np.eye(A[2])
-	for i in range(100):
-		(Q,R) = decomper.QR(A)
-		ra = np.dot(R,Q)
-		A = ([],ra,A[2])
-		U = np.dot(U,Q)
-	print("Eigen vector:")
-	print(U)
-	print("Lambdas:")
-	Lds = []
-	Eigs = []
-	for i in range(A[2]):
-		v = ("EigV%d" % (i+1), str(U[i,:]))
-		Eigs.append(v)
-		d = ("lambda%d" % (i+1), str(A[1][i][i]))
-		Lds.append(d)
-		print("lambda%d = %lf " %(i+1, A[1][i][i]))
-	return render(request, 'QR/index.html')
+	Err = ""
+	try:
+		A = DataPaser().matrixFromRequest(request.GET['matrix'], request.GET['dim'])
+		decomper = Decomposition()
+		U = np.eye(A[2])
+		for i in range(100):
+			(Q,R) = decomper.QR(A)
+			ra = np.dot(R,Q)
+			A = ([],ra,A[2])
+			U = np.dot(U,Q)
+		print("Eigen vector:")
+		print(U)
+		print("Lambdas:")
+		Lds = []
+		Eigs = []
+		for i in range(A[2]):
+			v = ("EigV%d" % (i+1), str(U[i,:]))
+			Eigs.append(v)
+			d = ("lambda%d" % (i+1), str(A[1][i][i]))
+			Lds.append(d)
+			print("lambda%d = %lf " %(i+1, A[1][i][i]))
+	except Exception as e:
+		Err = "Something error"
+		
+	return render_to_response( 'QR/index.html', locals())
 
 class DataPaser:
 	def matrixParser(self, inifile):
@@ -64,15 +70,20 @@ class DataPaser:
 		return (matrix, npmatrix, dim)
 
 	def matrixFromRequest(self, raw, dim):
-		rawrows = raw.split("\r\n")
-		matrix = []
-		for row in rawrows:
-			stringrow = row.split(',')
-			newrow = []
-			for r in stringrow:
-				newrow.append(int(r))
-			matrix.append(newrow)
-		return (matrix, np.array(matrix), int(dim))
+		try:
+			rawrows = raw.split("\r\n")
+			matrix = []
+			for row in rawrows:
+				stringrow = row.split(',')
+				newrow = []
+				for r in stringrow:
+					newrow.append(int(r))
+				matrix.append(newrow)
+			return (matrix, np.array(matrix), int(dim))
+		except Exception as e:
+			raise Exception("Data error")
+			
+		
 
 class Decomposition:
 	def __init__(self):
