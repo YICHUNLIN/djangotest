@@ -1,0 +1,5 @@
+# djangotest
+
+numpy
+configparser
+math
