@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from QR.views import qrindex
+from QR.views import doQR
 urlpatterns = [
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
@@ -8,4 +9,5 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^qr/', qrindex),
+    url(r'^doQR/$', doQR)
 ]
