@@ -1,5 +1,6 @@
 # djangotest
 
-numpy
-configparser
-math
+### numpy
+### configparser
+### math
+### django + QR decomposition
