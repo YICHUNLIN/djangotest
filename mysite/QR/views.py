@@ -36,10 +36,13 @@ def doQR(request):
 			d = ("lambda%d" % (i+1), str(A[1][i][i]))
 			Lds.append(d)
 			print("lambda%d = %lf " %(i+1, A[1][i][i]))
+		#return render(request, 'QR/index.html',{"U":U,"Lds":Lds, "Eigs":Eigs, "orimatrix":A[0], "dim":A[2]})	
+		
 	except Exception as e:
 		Err = "Something error"
-		
 	return render_to_response( 'QR/index.html', locals())
+	
+
 
 class DataPaser:
 	def matrixParser(self, inifile):

@@ -37,7 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "QR"
+    "QR",
+    "solveEQU",
+    "Books"
 )
 
 MIDDLEWARE_CLASSES = (
