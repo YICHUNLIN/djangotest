@@ -12,8 +12,10 @@ def search(request):
 		message = "You are search %r" %(request.GET['q'])
 		try:
 			r = Boook.objects.get(title=str(request.GET['q']))
+			if(r):
+				return render(request, 'books/index.html', {'message':message, 'publisher':r.publisher, 'title':r.title})
 		except Exception as e:
 			print('not found' + request.GET['q'])
 	else:
 		message = "You are summit empty form."
-	return render(request, 'books/index.html', {'message':message, 'obj':''})
+	return render(request, 'books/index.html', {'message':message})
