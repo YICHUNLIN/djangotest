@@ -1,9 +1,39 @@
+
 <!DOCTYPE html>
+
 <html>
 <head>
 	<title>QR</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[// ><!--
+ 
+ window.onload= function(){ 
+    var xx = {{X|safe}}
+    var yy = {{Y|safe}}
+
+    
+
+    var linedata = {
+	    labels :xx,
+	    datasets : [
+	        {
+	            fillColor : "rgba(151,187,205,0.5)",
+	            strokeColor : "rgba(151,187,205,0.8)",
+	            highlightFill : "rgba(151,187,205,0.75)",
+	            highlightStroke : "rgba(151,187,205,1)",
+	            data : yy
+	        }
+	    ]
+	}
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var line = new Chart(ctx, {type:'line',data:linedata,responsive : true,scaleShowLabels : true,});
+}
+ 
+//--><!]]>
+</script>
 </head>
-<body>
+<body >
 	<p>{{title}}</p>
 
 	<p>{{dept}}</p>
@@ -17,6 +47,9 @@
 		<p>u[1]:<input type="text" name="U1value" /></p>
 		<button type="submit"> 計算</button>
 	</form>
-	<p>{{Y}}</p>
+
+	<canvas id="myChart" width="200px" height="100px"></canvas>
+
+
 </body>
 </html>

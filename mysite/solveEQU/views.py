@@ -23,6 +23,7 @@ def RKindex(request):
 		def Pf(fn,t):
 			return P
 		(X,Y) = RungeKutta(f2, Pf,fn(wn(K,M)), C, u, dt, sec, M, K)
+
 		return render(request, 'RK/index.html', { 'dept':'土木碩一', 'title':'Vic Lin 2017 06 07', 'Y':Y,'X':X})
 	except Exception as e:
 		print(e)

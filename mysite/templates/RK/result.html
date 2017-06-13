@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>QR</title>
+	<!--<script src="{% static "chart.js" %}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[// ><!--
+ 
+    var xx = {{X|safe}}
+    var yy = {{Y|safe}}
+
+    
+
+    var linedata = {
+    labels :xx,
+    datasets : [
+        {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,0.8)",
+            highlightFill : "rgba(151,187,205,0.75)",
+            highlightStroke : "rgba(151,187,205,1)",
+            data : yy
+        }
+    ]
+}
+window.onload = function(){
+    alert('xx');
+    var ctx = document.getElementById("myChart").getContext("2d");
+    window.myBar = new Chart(ctx).Line( {linedata,responsive : true,scaleShowLabels : true,});
+}
+ 
+//--><!]]>
+</script>
+</head>
+<body>
+	<canvas id="myChart" width="400" height="400"></canvas>
+
+</body>
+</html>
